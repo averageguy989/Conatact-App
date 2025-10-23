@@ -1,16 +1,8 @@
-import { useEffect } from "react";
+import HomePage from "./pages/HomePage";
 import { supabase } from "./lib/supabaseClient";
 
 function App() {
-  useEffect(() => {
-    const test = async () => {
-      const { data, error } = await supabase.from("contacts").select("*");
-      console.log("Data:", data, "Error:", error);
-    };
-    test();
-  }, []);
-
-  return <h1>Contact List App</h1>;
+  return <HomePage/>
 }
 
 export default App;
