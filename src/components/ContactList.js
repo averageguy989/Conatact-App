@@ -2,19 +2,19 @@ import ContactCard from "./ContactCard";
 import { useEffect, useState } from "react";
 import getContact from "../lib/api";
 
-function ContactList() {
+function ContactList({search}) {
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
 
 
   useEffect(() => {
     const fetchContacts = async () => {
-        const data = await getContact();
+        const data = await getContact(search);
         setContacts(data);
         setLoading(false);
     }
     fetchContacts();
-  },[])
+  },[search])
 
   if (loading) return <p>Loading contacts...</p>;
 

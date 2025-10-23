@@ -11,7 +11,7 @@ function HomePage() {
       <h1 className="text-3xl font-bold text-center">Contact List</h1>
       <SearchBar value={search} onChange={setSearch} />
       <AddContactForm />
-      <ContactList />
+      <ContactList search={search}/>
     </div>
   );
 }

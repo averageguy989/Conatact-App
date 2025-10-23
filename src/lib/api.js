@@ -1,15 +1,20 @@
 import {supabase} from "./supabaseClient"
 
-export async function getContact() {
+export async function getContact(searchTerm = "") {
     try {
-        const {data, error} = await supabase
-        .from("contacts")
-        .select("*")
-        .order("name", {ascending: true})
-        .limit(20)
+        let query = supabase
+            .from("contacts")
+            .select("*")
+            .order("name", { ascending: true })
+            .limit(20);
 
+        if(searchTerm.trim() !== ""){
+            query = query.ilike("name", `%${searchTerm}%`)
+        }
+
+        const { data, error } = await query;
         if(error){
-            console.log("Supabase query erorr: ",error.message);
+            console.error("Supabase query error:", error.message);
             return [];
         }
 
