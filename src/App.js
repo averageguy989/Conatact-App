@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { supabase } from "./lib/supabaseClient";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  useEffect(() => {
+    const test = async () => {
+      const { data, error } = await supabase.from("contacts").select("*");
+      console.log("Data:", data, "Error:", error);
+    };
+    test();
+  }, []);
+
+  return <h1>Contact List App</h1>;
 }
 
 export default App;
