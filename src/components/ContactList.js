@@ -1,14 +1,28 @@
 import ContactCard from "./ContactCard";
-
-const dummyContacts = [
-  { id: 1, name: "Alice Johnson", email: "alice@mail.com", phone: "123-456-7890" },
-  { id: 2, name: "Bob Smith", email: "bob@mail.com", phone: "987-654-3210" },
-];
+import { useEffect, useState } from "react";
+import getContact from "../lib/api";
 
 function ContactList() {
+  const [contacts, setContacts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+
+  useEffect(() => {
+    const fetchContacts = async () => {
+        const data = await getContact();
+        setContacts(data);
+        setLoading(false);
+    }
+    fetchContacts();
+  },[])
+
+  if (loading) return <p>Loading contacts...</p>;
+
+  if (contacts.length === 0) return <p>No contacts found..</p>;
+
   return (
     <div className="grid gap-4">
-      {dummyContacts.map((c) => (
+      {contacts.map((c) => (
         <ContactCard key={c.id} {...c} />
       ))}
     </div>
