@@ -37,8 +37,8 @@ function ContactList({search}) {
               <p className="font-medium text-lg text-gray-800">{contact.name}</p>
             <p className="text-gray-500 text-sm">{contact.phone}</p>
             </div>
-            <div className="flex flex-row gap-4 text-emerald-500 items-center">
-              <Mail size={28}/>
+            <div className="flex flex-row gap-4 items-center">
+              <Mail size={28} className="text-emerald-300 hover:text-emerald-500"/>
             </div>
           </div>
         </div>

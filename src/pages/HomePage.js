@@ -15,7 +15,7 @@ function HomePage() {
 
   const handleAddContact = () => {
     setAddContact(false);
-    setRefreshKey((prev) => prev + 1);
+    setRefreshKey(prev => prev + 1);
   };
 
   const handleChangeContact = () => {
@@ -39,19 +39,18 @@ function HomePage() {
           </div>
           <div>
             <SearchBar value={search} onChange={setSearch} />
+            {console.log("hello everyone")}
           </div>
         </div>
 
-        
         <ContactList key={refreshKey} search={debouncedSearch} />
         <div className="sticky bottom-6 flex justify-end">
-            {addcontact ? (
-                <AddContactForm onAdd={handleAddContact} />
-            ) : (
-                <AddContactButton onClick={handleChangeContact}/>
-            )}
+          {addcontact ? (
+            <AddContactForm onAdd={handleAddContact} />
+          ) : (
+            <AddContactButton onClick={handleChangeContact} />
+          )}
         </div>
-        
       </div>
     </div>
   );
