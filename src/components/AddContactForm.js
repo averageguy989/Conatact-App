@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { supabase } from "../lib/supabaseClient";
-import toast, { Toaster } from "react-hot-toast";
 
 function AddContactForm({ onAdd }) {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
@@ -30,20 +29,30 @@ function AddContactForm({ onAdd }) {
       if (supabaseError) throw supabaseError;
 
       setFormData({ name: "", email: "", phone: "" });
-      setTimeout(()=>{
-        console.log("Adding contact")
-      },2000);
-      onAdd?.(data[0]);
+      onAdd?.(true);
     } catch (err) {
       console.error("Error adding contact:", err.message);
-      setError("Failed to add contact. Try again.");
+      setError("⚠️ Failed to add contact. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <>
+    <div className="relative">
+      {error && (
+        <div
+          className="absolute top-[-60px] left-0 right-0 mx-auto w-fit px-4 py-2 bg-red-500 text-white rounded-md shadow-md animate-error-slide-down-up"
+        >
+          {error}
+          {(() => {
+            setTimeout(() => {
+              setError("");
+            }, 3000);
+            return null;
+          })()}
+        </div>
+      )}
 
       <form onSubmit={handleSubmit} className="space-y-3">
         <div className="flex flex-col gap-2">
@@ -66,11 +75,9 @@ function AddContactForm({ onAdd }) {
             placeholder="Phone"
             value={formData.phone}
             onChange={handleChange}
-            className="w-full p-2 border rounded-md focus:ring-1 border-gray-200 focus:ring-emerald-400  outline-none"
+            className="w-full p-2 border rounded-md focus:ring-1 border-gray-200 focus:ring-emerald-400 outline-none"
           />
         </div>
-
-        {error && <p className="text-red-500 text-sm">{error}</p>}
 
         <div className="flex gap-3">
           <button
@@ -84,14 +91,13 @@ function AddContactForm({ onAdd }) {
             type="button"
             disabled={loading}
             className="bg-red-400 text-white px-4 py-2 rounded-md hover:bg-red-600 disabled:opacity-50"
-            onClick={() => onAdd?.(null)}
+            onClick={() => onAdd?.(false)}
           >
             Cancel
           </button>
         </div>
-        
       </form>
-    </>
+    </div>
   );
 }
 

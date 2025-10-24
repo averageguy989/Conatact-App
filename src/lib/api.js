@@ -6,7 +6,7 @@ export async function getContact(searchTerm = "") {
             .from("contacts")
             .select("*")
             .order("name", { ascending: true })
-            .limit(20);
+            .limit(15);
 
         if(searchTerm.trim() !== ""){
             query = query.ilike("name", `%${searchTerm}%`)

@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes slideDownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+
+.animate-slide-down {
+  animation: slideDownFade 0.8s ease-out forwards;
+}
+.animate-slide-up {
+  animation: slideUpFade 0.8s ease-in forwards;
+}
+.animate-error-slide-down-up{
+  animation: slideUpFade 3s ease-in-out forwards;
+}
