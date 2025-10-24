@@ -1,70 +1,163 @@
-# Getting Started with Create React App
+# Contact List App 📇
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive contact management application built with React and Supabase. Create, search, and manage your contacts with a beautiful UI powered by Tailwind CSS.
+
+## 🌐 Live Demo
+
+**🔗 [View Live App](https://contacts-app-weld.vercel.app/)**
+
+
+## Features
+
+- ✅ Add new contacts with name, email, and phone
+- 🔍 Real-time search functionality with debouncing
+- 🎨 Modern, responsive UI with Tailwind CSS
+- 📱 Mobile-friendly design
+- ⚡ Fast performance with Supabase backend
+- 🎭 Smooth animations with Framer Motion
+- 🔔 Toast notifications for user feedback
+
+## Tech Stack
+
+- **React** - UI library
+- **Tailwind CSS** - Styling
+- **Supabase** - Backend and database
+- **Lucide React** - Icon library
+- **Framer Motion** - Animations
+
+## Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+- A Supabase account (free tier available)
+
+## Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/averageguy989/Conatact-App.git
+cd contact-lis
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Set Up Supabase
+
+1. Go to [Supabase](https://supabase.com) and create a new project
+2. In your Supabase project, go to **SQL Editor**
+3. Create a `contacts` table with the following schema:
+
+```sql
+CREATE TABLE contacts (
+  id BIGSERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT,
+  phone TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+```
+
+4. Go to **Project Settings** → **API** to get your credentials
+
+### 4. Configure Environment Variables
+
+Create a `.env` file in the root directory:
+
+```bash
+touch .env
+```
+
+Add the following environment variables:
+
+```env
+REACT_APP_SUPABASE_URL=your_supabase_project_url
+REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+**Example:**
+```env
+REACT_APP_SUPABASE_URL=https://xxxxxxxxxxxxx.supabase.co
+REACT_APP_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+### 5. Start the Development Server
+
+```bash
+npm start
+```
+
+The app will open at [http://localhost:3000](http://localhost:3000)
 
 ## Available Scripts
 
-In the project directory, you can run:
-
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Runs the app in development mode. The page will reload when you make changes.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds the app for production to the `build` folder. The build is optimized for best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### `npm test`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Launches the test runner in interactive watch mode.
 
-### `npm run eject`
+## Project Structure
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```
+contact-lis/
+├── src/
+│   ├── components/       # React components
+│   │   ├── AddContactButton.js
+│   │   ├── AddContactForm.js
+│   │   ├── ContactCard.js
+│   │   ├── ContactList.js
+│   │   ├── HomeHeader.js
+│   │   └── SearchBar.js
+│   ├── hooks/            # Custom React hooks
+│   │   └── useDebounce.js
+│   ├── lib/              # API and client configuration
+│   │   ├── api.js
+│   │   └── supabaseClient.js
+│   ├── pages/            # Page components
+│   │   └── HomePage.js
+│   └── index.js          # Entry point
+├── .env                  # Environment variables (create this)
+├── package.json
+└── tailwind.config.js
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Environment Variables
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The following environment variables are required for the app to function:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `REACT_APP_SUPABASE_URL` | Your Supabase project URL | Yes |
+| `REACT_APP_SUPABASE_ANON_KEY` | Your Supabase anonymous/public key | Yes |
+
+## Troubleshooting
+
+### App won't connect to Supabase
+
+- Verify your `.env` file exists in the root directory
+- Check that environment variable names start with `REACT_APP_`
+- Restart the development server after creating/modifying `.env`
+- Verify your Supabase URL and API key are correct
+
+### Styling not working
+
+- Make sure you installed Tailwind CSS dependencies: `npm install -D tailwindcss postcss autoprefixer`
+- Verify `tailwind.config.js` is properly configured
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [React Documentation](https://reactjs.org/)
+- [Supabase Documentation](https://supabase.com/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Lucide Icons](https://lucide.dev/)
